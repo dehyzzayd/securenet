@@ -1,13 +1,14 @@
 ---
 import Title from '../components/Title.astro';
 import { services } from '../lib/data';
+// Real SecureNet product/showroom photos (public/media/products)
 const img: Record<string, string> = {
-  'videosurveillance': 'videosurveillance',
-  'controle-acces': 'controle-acces',
-  'alarme-intrusion': 'alarme-intrusion',
-  'reseau-infrastructure': 'reseau-infrastructure',
-  'telesurveillance-maintenance': 'telesurveillance',
-  'etude-conseil': 'etude-conseil',
+  'videosurveillance': 'p06',            // Dahua HDCVI WizColor bullet cams
+  'controle-acces': 'p04',              // Dahua Hero A1 indoor pan/tilt
+  'alarme-intrusion': 'p16',            // IMOU Cruiser 4G, warning lights
+  'reseau-infrastructure': 'p05',       // Orange Wi-Fi routers
+  'telesurveillance-maintenance': 'p17', // Dahua WizSense DVR/NVR
+  'etude-conseil': 'p01',               // Dahua PTZ camera
 };
 ---
 <section class="deck-sec pad-y" id="expertises">
@@ -44,7 +45,7 @@ const img: Record<string, string> = {
             </ul>
           </div>
           <div class="deck__media">
-            <img src={`/media/services/${img[s.slug]}.png`} alt={`SecureNet — ${s.title}`} loading="lazy" decoding="async" />
+            <img src={`/media/products/${img[s.slug]}.jpg`} alt={`SecureNet — ${s.title}`} loading="lazy" decoding="async" />
             <a class="deck__more" href="/#contact">En savoir plus →</a>
           </div>
         </article>

@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer-core';
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const w = +(process.argv[2] || 390);
 const tag = process.argv[3] || 'm';
-const sels = ['.hero', '.pos', '.figures', '.deck-sec', '.story', '.zones', '.partners', '.reveal', '.pillar', '.download', '.contact', '.site-footer'];
+const sels = ['.hero', '.pos', '.figures', '.deck-sec', '.products', '.story', '.zones', '.partners', '.reveal', '.pillar', '.download', '.contact', '.site-footer'];
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'shell', args: ['--no-sandbox', '--disable-gpu', '--hide-scrollbars'] });
 const page = await browser.newPage();
 await page.setViewport({ width: w, height: 900, deviceScaleFactor: 1, isMobile: w < 900, hasTouch: w < 900 });

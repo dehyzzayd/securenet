@@ -1,0 +1,55 @@
+---
+import Title from '../components/Title.astro';
+import { products } from '../lib/data';
+const half = Math.ceil(products.length / 2);
+const rowA = products.slice(0, half);
+const rowB = products.slice(half);
+const loopA = [...rowA, ...rowA];
+const loopB = [...rowB, ...rowB];
+---
+<section class="products pad-y" id="produits">
+  <span class="ghost" style="top:-.3em;right:-3%" aria-hidden="true">Stock</span>
+  <div class="container">
+    <div class="products__head">
+      <div class="products__intro">
+        <span class="eyebrow eyebrow--ink">En stock · showroom</span>
+        <Title as="h2" lines={['Le matériel,']} accent="déjà en stock" tone="navy" size="l" />
+        <p class="lead">
+          Caméras dôme, tube, PTZ, Wi-Fi, solaires et 4G, enregistreurs, disques et
+          matériel réseau : notre showroom est approvisionné en permanence. Vous voyez le
+          produit, on vous l’installe — pas de délai d’attente.
+        </p>
+      </div>
+
+      <figure class="cframe products__video" data-reveal>
+        <video
+          src="/media/products/install.mp4"
+          poster="/media/products/install-poster.jpg"
+          muted loop playsinline autoplay preload="metadata"
+          aria-label="Caméra solaire Dahua installée par SecureNet"></video>
+        <figcaption class="cframe__chips"><span class="chip">Installation réelle</span></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="marquee products__marquee" aria-label="Produits en stock">
+    <div class="marquee__track">
+      {loopA.map((p) => (
+        <figure class="product-tile">
+          <img src={`/media/products/${p.file}.jpg`} alt={`SecureNet — ${p.label}`} loading="lazy" decoding="async" />
+          <figcaption>{p.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+  <div class="marquee marquee--rev products__marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {loopB.map((p) => (
+        <figure class="product-tile">
+          <img src={`/media/products/${p.file}.jpg`} alt={`SecureNet — ${p.label}`} loading="lazy" decoding="async" />
+          <figcaption>{p.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

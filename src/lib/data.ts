@@ -7,8 +7,8 @@ export const brand = {
   baseline: 'Sécurité & vidéosurveillance',
   since: 2013,
   region: 'Grand Casablanca',
-  phone: '+212 5 23 00 00 00',
-  whatsapp: '+212 6 00 00 00 00',
+  phone: '+212 634-424464',
+  whatsapp: '+212 634-424464',
   email: 'contact@securenet.ma',
   address: 'Zone Industrielle — Mohammedia, Maroc',
   hours: 'Lun – Ven · 8h – 19h · Astreinte 7j/7',
@@ -141,6 +141,34 @@ export const sectors = [
   'Commerces & retail', 'Copropriétés', 'Industrie & logistique',
   'Collectivités', 'Santé & professions libérales', 'Hôtellerie & restauration',
   'Concessions automobiles', 'Bureaux & tertiaire',
+];
+
+// Marques officielles distribuées & installées (produits en stock)
+export const brands = [
+  'Dahua', 'HikVision', 'IMOU', 'EZVIZ', 'Uniarch',
+  'Xiaomi', 'TP-Link', 'D-Link', 'Seagate', 'Orange',
+];
+
+// Galerie produits réels (public/media/products/p01…p18.jpg)
+export const products = [
+  { file: 'p11', label: 'Notre showroom' },
+  { file: 'p03', label: 'Dahua Picoo Dual 3K' },
+  { file: 'p06', label: 'Dahua HDCVI WizColor' },
+  { file: 'p01', label: 'Dahua PTZ' },
+  { file: 'p14', label: 'IMOU solaire 24/7' },
+  { file: 'p15', label: 'IMOU Cruiser Dual' },
+  { file: 'p16', label: 'IMOU Cruiser 4G' },
+  { file: 'p13', label: 'IMOU Ranger 2' },
+  { file: 'p18', label: 'EZVIZ H9c' },
+  { file: 'p07', label: 'EZVIZ CB2 batterie' },
+  { file: 'p04', label: 'Dahua Hero A1' },
+  { file: 'p09', label: 'Dahua Picoo B1' },
+  { file: 'p02', label: 'Dahua Picoo Dual 2K' },
+  { file: 'p08', label: 'Uniarch Panda 4G' },
+  { file: 'p17', label: 'Enregistreurs NVR' },
+  { file: 'p05', label: 'Réseau & routeurs' },
+  { file: 'p10', label: 'Stockage 4 To' },
+  { file: 'p12', label: 'Produits officiels' },
 ];
 
 // Choix pour le formulaire de contact

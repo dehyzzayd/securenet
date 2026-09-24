@@ -1,45 +1,50 @@
 ---
 import Title from '../components/Title.astro';
-import { sectors } from '../lib/data';
+import { sectors, brands } from '../lib/data';
 // Two rows, opposite directions. Duplicated once for a seamless loop.
-const rowA = [...sectors, ...sectors];
-const rowB = [...sectors.slice().reverse(), ...sectors.slice().reverse()];
+const brandRow = [...brands, ...brands];
+const sectorRow = [...sectors.slice().reverse(), ...sectors.slice().reverse()];
 ---
 <section class="partners pad-y" id="confiance">
-  <span class="ghost" style="top:-.28em;left:-3%" aria-hidden="true">Confiance</span>
+  <span class="ghost" style="top:-.28em;left:-3%" aria-hidden="true">Marques</span>
   <div class="container">
     <div class="partners__grid">
       <div>
-        <span class="eyebrow eyebrow--ink">Ils nous font confiance</span>
-        <Title as="h2" lines={['La sécurité', 'de ceux qui']} accent="nous confient" tone="navy" size="l" />
+        <span class="eyebrow eyebrow--ink">Distributeur agréé au Maroc</span>
+        <Title as="h2" lines={['Les grandes', 'marques,']} accent="posées par des experts" tone="navy" size="l" />
         <p class="lead">
-          Commerçants, syndics, industriels, professions libérales : nos clients n’ont pas
-          le même métier, mais tous veulent la même chose — dormir tranquille. Nous
-          intervenons pour des structures de toutes tailles, du commerce de quartier au
-          site logistique.
+          Dahua, HikVision, IMOU, EZVIZ, Uniarch : nous distribuons et installons du
+          matériel de marque, en produits officiels garantis. Caméras filaires, Wi-Fi,
+          solaires ou 4G, enregistreurs, réseau et stockage — tout est en stock dans
+          notre showroom, prêt à être posé.
         </p>
-        <a class="btn" href="/#contact" style="margin-top:30px">
-          Rejoindre nos clients
+        <div class="trust-row">
+          <span class="trust-chip">Produits officiels</span>
+          <span class="trust-chip">Garantie constructeur</span>
+          <span class="trust-chip">Conseil &amp; pose</span>
+        </div>
+        <a class="btn" href="/#produits" style="margin-top:28px">
+          Voir nos produits
           <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="cframe partners__frame" data-reveal>
-        <img src="/media/services/partners.png" alt="Bâtiment commercial sécurisé par SecureNet" loading="lazy" decoding="async" />
-        <div class="cframe__chips"><span class="chip">Références sur demande</span></div>
+        <img src="/media/products/p08.jpg" alt="Stock de caméras de sécurité — showroom SecureNet" loading="lazy" decoding="async" />
+        <div class="cframe__chips"><span class="chip">Matériel en stock</span></div>
       </div>
     </div>
 
-    <div class="marquee-label">Les secteurs que nous protégeons</div>
+    <div class="marquee-label">Marques distribuées &amp; installées</div>
   </div>
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      {rowA.map((s) => <span class="sector-chip">{s}</span>)}
+      {brandRow.map((b) => <span class="sector-chip sector-chip--brand">{b}</span>)}
     </div>
   </div>
   <div class="marquee marquee--rev" aria-hidden="true">
     <div class="marquee__track">
-      {rowB.map((s) => <span class="sector-chip">{s}</span>)}
+      {sectorRow.map((s) => <span class="sector-chip">{s}</span>)}
     </div>
   </div>
 </section>
