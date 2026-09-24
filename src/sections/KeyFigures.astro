@@ -1,0 +1,48 @@
+---
+import { figures } from '../lib/data';
+---
+<section class="figures pad-y on-dark" id="chiffres">
+  <div class="figures__bp" aria-hidden="true"></div>
+  <div class="container figures__inner">
+    <div class="figures__head">
+      <span class="eyebrow">Chiffres clés · SecureNet en {figures.since}</span>
+    </div>
+
+    <div class="figures__grid">
+      <div class="figures__big-wrap">
+        <div class="figures__big">
+          <span class="odo" data-value={figures.headlineNumber}>0</span>
+          <span class="u">{figures.headlineUnit}</span>
+        </div>
+        <p class="lead" style="margin-top:22px">
+          De la première caméra posée à la supervision d’aujourd’hui, nous avons
+          appris un métier sur le terrain, chantier après chantier, au service de
+          commerçants, de syndics et d’industriels.
+        </p>
+        <div class="figures__since">Depuis {figures.since}</div>
+      </div>
+
+      <div class="figures__vsep" aria-hidden="true"></div>
+
+      <div class="figures__rows">
+        {figures.rows.map((r) => (
+          <div class="figures__row">
+            <div class="v">
+              {r.plus && <span class="stat__plus">+</span>}
+              <span class="odo" data-value={r.value}>0</span>
+              {r.unit && <span class="stat__unit">{r.unit}</span>}
+            </div>
+            <div class="stat__label" style="margin-top:0;max-width:16ch;text-align:right">{r.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="figures__cta">
+      <a class="btn btn--amber" href="/#contact">
+        Discuter de votre projet
+        <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

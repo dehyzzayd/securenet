@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice">
+  <g stroke="#ffffff" stroke-width="1" opacity="0.16">
+    <!-- fine grid -->
+    <g opacity="0.5">
+      <path d="M0 0V900M100 0V900M200 0V900M300 0V900M400 0V900M500 0V900M600 0V900M700 0V900M800 0V900M900 0V900M1000 0V900M1100 0V900M1200 0V900M1300 0V900M1400 0V900M1500 0V900M1600 0V900"/>
+      <path d="M0 0H1600M0 100H1600M0 200H1600M0 300H1600M0 400H1600M0 500H1600M0 600H1600M0 700H1600M0 800H1600M0 900H1600"/>
+    </g>
+  </g>
+  <g stroke="#ffffff" stroke-width="2" opacity="0.5">
+    <!-- building outline -->
+    <rect x="180" y="150" width="1240" height="600"/>
+    <!-- interior partitions -->
+    <path d="M180 430H620M620 150V620M620 620H1080M1080 300V750M1080 300H1420"/>
+    <path d="M900 430H1080M400 430V750"/>
+    <!-- door openings -->
+    <path d="M600 300H640M600 300 a20 20 0 0 1 20 20" opacity="0.7"/>
+    <path d="M1080 560H1120M1080 560 a20 20 0 0 0 20 -20" opacity="0.7"/>
+  </g>
+  <!-- camera positions + FOV cones -->
+  <g opacity="0.75">
+    <g stroke="#cfa574" stroke-width="1.5" fill="#cfa574">
+      <circle cx="230" cy="200" r="5" fill-opacity="0.9"/>
+      <path d="M230 200 L470 340 M230 200 L360 430 Z" fill="none"/>
+      <path d="M230 200 L470 340 A280 280 0 0 1 360 430 Z" fill-opacity="0.06"/>
+    </g>
+    <g stroke="#cfa574" stroke-width="1.5" fill="#cfa574">
+      <circle cx="1370" cy="200" r="5" fill-opacity="0.9"/>
+      <path d="M1370 200 L1130 350 A290 290 0 0 0 1260 470 Z" fill="none"/>
+      <path d="M1370 200 L1130 350 A290 290 0 0 0 1260 470 Z" fill-opacity="0.06"/>
+    </g>
+    <g stroke="#cfa574" stroke-width="1.5" fill="#cfa574">
+      <circle cx="1050" cy="720" r="5" fill-opacity="0.9"/>
+      <path d="M1050 720 L840 560 A280 280 0 0 1 1180 540 Z" fill="none"/>
+      <path d="M1050 720 L840 560 A280 280 0 0 1 1180 540 Z" fill-opacity="0.06"/>
+    </g>
+  </g>
+  <!-- dimension line -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.35">
+    <path d="M180 110H1420M180 100V120M1420 100V120"/>
+  </g>
+  <g fill="#ffffff" opacity="0.3" font-family="monospace" font-size="18">
+    <text x="770" y="98">62.40 m</text>
+  </g>
+</svg>

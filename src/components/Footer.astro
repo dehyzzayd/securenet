@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import { brand, services } from '../lib/data';
+---
+<footer class="site-footer on-dark" id="entreprise">
+  <div class="site-footer__bp" aria-hidden="true"></div>
+  <div class="container site-footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <Logo size={34} />
+        <p class="footer__about">
+          Installateur indépendant de vidéosurveillance, contrôle d’accès et réseaux en {brand.region}.
+          Nous protégeons commerces, copropriétés et sites industriels depuis {brand.since}.
+        </p>
+        <a class="link-arrow" href="/#contact">
+          Demander une étude
+          <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Expertises</h4>
+        <ul>
+          {services.map((s) => <li><a href={`/#expertises`}>{s.title}</a></li>)}
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/#chantiers">Réalisations</a></li>
+          <li><a href="/#zones">Zones d’intervention</a></li>
+          <li><a href="/#confiance">Références</a></li>
+          <li><a href="/#dossier">Dossier de présentation</a></li>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col footer__contact">
+        <h4>Contact</h4>
+        <div class="v"><a href={`tel:${brand.phone.replace(/\s/g, '')}`} style="text-decoration:none;color:#fff">{brand.phone}</a></div>
+        <div class="v" style="margin-top:6px"><a href={`mailto:${brand.email}`} style="text-decoration:none;color:#fff">{brand.email}</a></div>
+        <div class="l">Adresse</div>
+        <div style="color:rgba(255,255,255,.78);font-size:13.5px;margin-top:6px">{brand.address}</div>
+        <div class="l">Horaires</div>
+        <div style="color:rgba(255,255,255,.78);font-size:13.5px;margin-top:6px">{brand.hours}</div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© {new Date().getFullYear()} {brand.name} — {brand.baseline}. Tous droits réservés.</span>
+      <span><a href="/mentions-legales">Mentions légales & confidentialité</a></span>
+    </div>
+  </div>
+</footer>

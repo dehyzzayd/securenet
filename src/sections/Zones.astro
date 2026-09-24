@@ -1,0 +1,32 @@
+---
+import Title from '../components/Title.astro';
+import { zones } from '../lib/data';
+---
+<section class="zones pad-y" id="zones">
+  <div class="container">
+    <div class="zones__wrap" data-map data-zones={JSON.stringify(zones)}>
+      <div class="zones__map" id="zones-map" role="img" aria-label="Carte des zones d’intervention dans le Grand Casablanca"></div>
+      <div class="zones__overlay" aria-hidden="true"></div>
+
+      <div class="zones__copy">
+        <span class="eyebrow eyebrow--ink">Zones d’intervention</span>
+        <Title as="h2" lines={['Présents dans le', 'Grand']} accent="Casablanca" tone="navy" size="m" />
+        <p>
+          De <span class="b">Casablanca</span> à <span class="b">Rabat</span>, en passant par
+          Mohammedia, Bouznika et Benslimane, nous intervenons dans un rayon d’une heure
+          autour de nos ateliers — pour poser vite et revenir vite.
+        </p>
+        <div class="zones__mini">
+          <div><div class="v">{zones.length}</div><div class="l">villes couvertes</div></div>
+          <div><div class="v">1h</div><div class="l">rayon d’intervention</div></div>
+        </div>
+      </div>
+
+      <div class="zones__zoom">
+        <button type="button" id="zoom-in" aria-label="Zoomer">+</button>
+        <button type="button" id="zoom-out" aria-label="Dézoomer">−</button>
+      </div>
+      <div class="zones__hint">Survolez une ville · glissez pour explorer</div>
+    </div>
+  </div>
+</section>

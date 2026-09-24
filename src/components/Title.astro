@@ -1,0 +1,13 @@
+---
+// <Title lines={["Parlons de","votre"]} accent="besoin" tone="navy" size="l" />
+interface Props {
+  as?: string; lines?: string[]; accent?: string; dot?: boolean;
+  tone?: 'navy' | 'ink' | 'white'; size?: 'hero' | 'xl' | 'l' | 'm' | 's';
+  reveal?: boolean; class?: string;
+}
+const { as: Tag = 'h2', lines = [], accent, dot = true, tone = 'navy', size = 'l', reveal = true, class: cls = '' } = Astro.props;
+---
+<Tag class:list={[`title title--${size} title--${tone}`, cls]} data-reveal={reveal ? 'lines' : undefined}>
+  {lines.map((l) => <span class="title__line">{l} </span>)}
+  {accent && <span class="title__accent">{accent}</span>}{dot && <span class="title__dot">.</span>}
+</Tag>

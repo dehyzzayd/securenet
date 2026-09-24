@@ -1,0 +1,61 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/components.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { brand } from '../lib/data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bare?: boolean; // no header/footer (admin)
+}
+const {
+  title = `${brand.name} — Vidéosurveillance & sécurité en ${brand.region}`,
+  description = `Installateur indépendant de vidéosurveillance, contrôle d’accès, alarme et réseaux. Étude et devis gratuits. Interventions en ${brand.region} depuis ${brand.since}.`,
+  bare = false,
+} = Astro.props;
+
+const site = import.meta.env.SITE || 'http://localhost:3040';
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'SecurityService',
+  name: brand.name,
+  description,
+  foundingDate: String(brand.since),
+  areaServed: brand.region,
+  telephone: brand.phone,
+  email: brand.email,
+  address: { '@type': 'PostalAddress', addressLocality: 'Mohammedia', addressRegion: 'Casablanca-Settat', addressCountry: 'MA' },
+  url: site,
+};
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#16226e" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="preload" href="/fonts/panchang-800.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+</head>
+<body>
+  <a href="#main" class="skip">Aller au contenu</a>
+  {!bare && <Header />}
+  <main id="main">
+    <slot />
+  </main>
+  {!bare && <Footer />}
+  {!bare && <script>import '../scripts/main.ts';</script>}
+</body>
+</html>

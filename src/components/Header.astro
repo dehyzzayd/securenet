@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+const nav = [
+  { href: '/#expertises', label: 'Expertises' },
+  { href: '/#chantiers', label: 'Réalisations' },
+  { href: '/#zones', label: 'Zones' },
+  { href: '/#entreprise', label: 'Entreprise' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+<header class="site-header" id="site-header">
+  <div class="container">
+    <Logo size={32} />
+    <nav class="nav" aria-label="Navigation principale">
+      {nav.map((l, i) => (
+        <>
+          {i > 0 && <span class="nav__sep" aria-hidden="true"></span>}
+          <a href={l.href}>{l.label}</a>
+        </>
+      ))}
+    </nav>
+    <div class="header__right">
+      <span class="lang" aria-label="Langue"><b>FR</b> · <span>EN</span></span>
+      <a class="btn btn--sm btn--amber" href="/#contact">
+        Demander une étude
+        <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  {nav.map((l, i) => (
+    <a href={l.href} data-close><span class="num">0{i + 1}</span>{l.label}</a>
+  ))}
+  <div class="mobile-menu__foot">
+    <span class="lang"><b>FR</b> · <span>EN</span></span>
+    <a class="btn btn--amber" href="/#contact" data-close>Demander une étude</a>
+  </div>
+</div>

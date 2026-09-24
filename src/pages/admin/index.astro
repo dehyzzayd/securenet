@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+import Logo from '../../components/Logo.astro';
+import { desc } from 'drizzle-orm';
+import { db, ensureSchema, schema } from '../../lib/db';
+import { isAuthed } from '../../lib/auth';
+export const prerender = false;
+
+if (!isAuthed(Astro.request)) return Astro.redirect('/admin/login');
+
+await ensureSchema();
+const filter = Astro.url.searchParams.get('status') || '';
+let leads = await db.select().from(schema.leads).orderBy(desc(schema.leads.createdAt));
+const dls = await db.select().from(schema.downloads).orderBy(desc(schema.downloads.createdAt));
+const counts = {
+  all: leads.length,
+  new: leads.filter((l) => l.status === 'new').length,
+  contacted: leads.filter((l) => l.status === 'contacted').length,
+  qualified: leads.filter((l) => l.status === 'qualified').length,
+  won: leads.filter((l) => l.status === 'won').length,
+  lost: leads.filter((l) => l.status === 'lost').length,
+};
+if (filter) leads = leads.filter((l) => l.status === filter);
+
+const STATUSES = ['new', 'contacted', 'qualified', 'won', 'lost'];
+const label: Record<string, string> = { new: 'Nouveau', contacted: 'Contacté', qualified: 'Qualifié', won: 'Gagné', lost: 'Perdu' };
+const fmt = (d: any) => { try { return new Date(d).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' }); } catch { return ''; } };
+---
+<Base title="Tableau de bord — SecureNet" bare>
+  <div class="admin">
+    <aside class="admin__side">
+      <div style="color:#fff;margin-bottom:34px"><Logo size={30} /></div>
+      <nav class="admin__nav">
+        <a href="/admin" class={!filter ? 'active' : ''}>Toutes les demandes <b>{counts.all}</b></a>
+        {STATUSES.map((s) => (
+          <a href={`/admin?status=${s}`} class={filter === s ? 'active' : ''}>{label[s]} <b>{(counts as any)[s]}</b></a>
+        ))}
+      </nav>
+      <div class="admin__side-foot">
+        <a class="btn btn--amber btn--sm" href="/api/admin/export.csv">Exporter CSV ↓</a>
+        <form method="POST" action="/api/admin/logout"><button class="admin__logout" type="submit">Déconnexion</button></form>
+        <a href="/" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none">← Voir le site</a>
+      </div>
+    </aside>
+
+    <main class="admin__main">
+      <header class="admin__head">
+        <div>
+          <span class="eyebrow eyebrow--ink">Tableau de bord</span>
+          <h1 class="title title--m title--navy" style="margin-top:8px">{filter ? label[filter] : 'Demandes'}<span class="title__accent">.</span></h1>
+        </div>
+        <div class="admin__kpis">
+          <div class="admin__kpi"><span class="v">{counts.new}</span><span class="l">nouvelles</span></div>
+          <div class="admin__kpi"><span class="v">{counts.all}</span><span class="l">au total</span></div>
+          <div class="admin__kpi"><span class="v">{dls.length}</span><span class="l">téléchargements</span></div>
+        </div>
+      </header>
+
+      {leads.length === 0 ? (
+        <p style="color:var(--muted);padding:40px 0">Aucune demande pour ce filtre. Les demandes envoyées via le formulaire de contact apparaîtront ici.</p>
+      ) : (
+        <div class="admin__table">
+          <div class="admin__tr admin__tr--head">
+            <span>Date</span><span>Contact</span><span>Besoin</span><span>Message</span><span>Statut</span>
+          </div>
+          {leads.map((l) => (
+            <div class="admin__tr" id={`lead-${l.id}`}>
+              <span class="admin__date">{fmt(l.createdAt)}<br /><small>#{l.id}</small></span>
+              <span>
+                <b>{l.name}</b><br />
+                <a href={`mailto:${l.email}`}>{l.email}</a>
+                {l.phone && <><br /><a href={`tel:${l.phone}`}>{l.phone}</a></>}
+                {l.profile && <><br /><small style="color:var(--muted)">{l.profile}</small></>}
+              </span>
+              <span>{l.need || '—'}<br /><small style="color:var(--muted)">{l.source || ''}</small></span>
+              <span class="admin__msg">{l.message || '—'}</span>
+              <span>
+                <span class={`sc sc--${l.status}`}>{label[l.status || 'new']}</span>
+                <form method="POST" action="/api/admin/status" class="admin__statusform">
+                  <input type="hidden" name="id" value={l.id} />
+                  <select name="status" onchange="this.form.submit()">
+                    {STATUSES.map((s) => <option value={s} selected={s === l.status}>{label[s]}</option>)}
+                  </select>
+                </form>
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </main>
+  </div>
+
+  <style>
+    .admin{display:grid;grid-template-columns:270px 1fr;min-height:100svh;background:var(--paper)}
+    .admin__side{background:var(--navy-deep);color:#fff;padding:26px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100svh}
+    .admin__nav{display:flex;flex-direction:column;gap:3px}
+    .admin__nav a{display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,.75);text-decoration:none;font:500 13px Satoshi;padding:11px 13px;transition:background .25s,color .25s}
+    .admin__nav a b{color:var(--amber);font-weight:700;font-size:12px}
+    .admin__nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+    .admin__nav a.active{background:var(--amber);color:var(--navy-deep)}
+    .admin__nav a.active b{color:var(--navy-deep)}
+    .admin__side-foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+    .admin__logout{background:none;border:1px solid var(--line-on-dark);color:#fff;padding:9px 16px;font:600 10px/1 Satoshi;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;clip-path:var(--cut2)}
+    .admin__logout:hover{background:rgba(255,255,255,.08)}
+    .admin__main{padding:clamp(24px,4vw,52px)}
+    .admin__head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+    .admin__kpis{display:flex;gap:14px}
+    .admin__kpi{border:1px solid var(--line-light);background:#fff;padding:14px 20px;clip-path:var(--cut2);text-align:center}
+    .admin__kpi .v{font:800 26px/1 Panchang;color:var(--navy);display:block}
+    .admin__kpi .l{font:500 10px/1 Satoshi;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;display:block}
+    .admin__table{display:flex;flex-direction:column;border:1px solid var(--line-light);background:#fff}
+    .admin__tr{display:grid;grid-template-columns:150px 1.4fr 1fr 1.6fr 150px;gap:16px;padding:16px 18px;border-top:1px solid var(--line-light);font:400 13px/1.5 Satoshi;color:var(--ink-2);align-items:start}
+    .admin__tr--head{border-top:0;background:var(--alt);font:600 10px/1 Satoshi;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);position:sticky;top:0;z-index:2}
+    .admin__tr a{color:var(--navy);text-decoration:none}
+    .admin__date{color:var(--muted);font-size:12px}
+    .admin__msg{color:var(--muted);max-height:5.5em;overflow:auto}
+    .admin__statusform{margin-top:9px}
+    .admin__statusform select{width:100%;height:34px;background:#fff;border:1px solid var(--line-light);font:400 12px Satoshi;padding:0 8px;cursor:pointer}
+    .sc{display:inline-block;font:700 10px/1 Satoshi;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;color:#fff}
+    .sc--new{background:var(--amber);color:var(--navy-deep)}
+    .sc--contacted{background:var(--navy)}
+    .sc--qualified{background:#2f6f5b}
+    .sc--won{background:#1f7a3d}
+    .sc--lost{background:#8a4038}
+    @media (max-width:900px){
+      .admin{grid-template-columns:1fr}
+      .admin__side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:12px;align-items:center}
+      .admin__nav{flex-direction:row;flex-wrap:wrap;flex:1}
+      .admin__side-foot{margin:0;flex-direction:row}
+      .admin__tr{grid-template-columns:1fr;gap:6px}
+      .admin__tr--head{display:none}
+    }
+  </style>
+</Base>

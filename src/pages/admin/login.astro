@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Logo from '../../components/Logo.astro';
+import { isAuthed } from '../../lib/auth';
+export const prerender = false;
+if (isAuthed(Astro.request)) return Astro.redirect('/admin');
+const error = Astro.url.searchParams.get('error');
+---
+<Base title="Admin — SecureNet" bare>
+  <section style="min-height:100svh;display:flex;align-items:center;justify-content:center;background:var(--navy-deep);padding:24px">
+    <div style="position:absolute;inset:0;background:url(/media/blueprint/plan.svg) center/cover;opacity:.3;mix-blend-mode:screen"></div>
+    <div style="position:relative;width:min(420px,100%);background:#fffdf7;border:1px solid var(--amber);clip-path:var(--imgcut1);padding:40px 34px">
+      <div style="color:var(--navy);margin-bottom:22px"><Logo size={34} /></div>
+      <span class="eyebrow eyebrow--ink">Espace administrateur</span>
+      <h1 class="title title--m title--navy" style="margin:12px 0 22px">Connexion<span class="title__accent">.</span></h1>
+      <form method="POST" action="/api/admin/login">
+        <label for="pw" style="font:600 12px/1 Satoshi;display:block;margin-bottom:10px;color:var(--navy)">Mot de passe</label>
+        <input id="pw" name="password" type="password" required autofocus
+          style="width:100%;height:48px;background:#fff;border:1px solid var(--line-light);padding:0 15px;font:400 15px Satoshi;color:var(--ink)" />
+        {error && <p style="color:#b23b2e;font:500 13px Satoshi;margin-top:12px">{error === 'rate' ? 'Trop de tentatives. Patientez quelques minutes.' : 'Mot de passe incorrect.'}</p>}
+        <button class="btn btn--amber btn--block" type="submit" style="margin-top:22px">Se connecter</button>
+      </form>
+      <a href="/" class="link-arrow" style="margin-top:24px;font-size:11px">← Retour au site</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,96 @@
+---
+import Title from '../components/Title.astro';
+import { brand, profileOptions, needOptions } from '../lib/data';
+---
+<section class="contact pad-y" id="contact">
+  <span class="ghost" style="top:-.3em;left:-4%" aria-hidden="true">Contact</span>
+  <div class="container contact__grid">
+    <div class="contact__info">
+      <span class="eyebrow eyebrow--ink">Prenons contact</span>
+      <Title as="h2" lines={['Parlons de', 'votre']} accent="besoin" tone="navy" size="l" />
+      <p class="lead">
+        Un commerce à protéger, un bâtiment à câbler, un système à moderniser ?
+        Décrivez-nous votre projet en deux lignes. On vous rappelle pour convenir
+        d’un repérage gratuit.
+      </p>
+      <div class="contact__rows">
+        <div class="contact__row">
+          <span class="l">Téléphone</span>
+          <a class="v" href={`tel:${brand.phone.replace(/\s/g, '')}`}>{brand.phone}</a>
+        </div>
+        <div class="contact__row">
+          <span class="l">E-mail</span>
+          <a class="v" href={`mailto:${brand.email}`}>{brand.email}</a>
+        </div>
+        <div class="contact__row">
+          <span class="l">Zone</span>
+          <span class="v">{brand.region} · rayon d’1h autour de Mohammedia</span>
+        </div>
+        <div class="contact__row">
+          <span class="l">Horaires</span>
+          <span class="v">{brand.hours}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card__inner">
+        <h3 class="form-card__title" id="form-title">Demander une <span class="title__accent">étude gratuite</span></h3>
+        <p class="form-card__promise">Une réponse sous 48 h ouvrées</p>
+
+        <form id="contact-form" method="POST" action="/api/contact" novalidate>
+          <div class="form-grid">
+            <div class="full">
+              <label for="f-name">Nom / société</label>
+              <input class="field" id="f-name" name="name" type="text" required autocomplete="name" placeholder="Ex. Boulangerie Martin" />
+              <span class="field-err" data-err="name"></span>
+            </div>
+            <div>
+              <label for="f-phone">Téléphone / WhatsApp</label>
+              <input class="field" id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="06 00 00 00 00" />
+              <span class="field-err" data-err="phone"></span>
+            </div>
+            <div>
+              <label for="f-email">E-mail</label>
+              <input class="field" id="f-email" name="email" type="email" required autocomplete="email" placeholder="vous@exemple.fr" />
+              <span class="field-err" data-err="email"></span>
+            </div>
+            <div>
+              <label for="f-profile">Vous êtes</label>
+              <select class="field" id="f-profile" name="profile">
+                <option value="" disabled selected>Choisir…</option>
+                {profileOptions.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="f-need">Votre besoin</label>
+              <select class="field" id="f-need" name="need">
+                <option value="" disabled selected>Choisir…</option>
+                {needOptions.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            </div>
+            <div class="full">
+              <label for="f-message">Votre projet <small>(optionnel)</small></label>
+              <textarea class="field" id="f-message" name="message" placeholder="Type de site, surface, nombre d’accès, contraintes…"></textarea>
+            </div>
+            <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="full consent">
+              <input id="f-consent" type="checkbox" name="consent" required />
+              <label for="f-consent" style="margin:0;font-weight:400">
+                J’accepte que mes informations soient utilisées pour être recontacté(e).
+                <a href="/mentions-legales">En savoir plus</a>.
+              </label>
+            </div>
+            <div class="full" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+              <button class="btn btn--amber" type="submit" id="contact-submit">
+                Envoyer ma demande
+                <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+              </button>
+              <span class="form-status" id="contact-status" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

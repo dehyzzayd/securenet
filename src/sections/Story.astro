@@ -1,0 +1,55 @@
+---
+import Title from '../components/Title.astro';
+import { projects } from '../lib/data';
+const img: Record<string, string> = {
+  'commerce-centre-ville': 'videosurveillance',
+  'copropriete-residentielle': 'controle-acces',
+  'entrepot-logistique': 'reseau-infrastructure',
+  'site-industriel': 'telesurveillance',
+  'cabinet-medical': 'alarme-intrusion',
+  'concession-automobile': 'partners',
+};
+---
+<section class="story pad-y" id="chantiers">
+  <img class="story__sketch" src="/media/blueprint/camera-sketch.svg" alt="" aria-hidden="true" />
+  <div class="container">
+    <div class="story__intro">
+      <span class="eyebrow eyebrow--ink">Réalisations</span>
+      <Title as="h2" lines={['Chantiers de']} accent="référence" tone="ink" size="l" />
+      <p class="lead">
+        Quelques installations parlent mieux que des promesses. Descendez :
+        les chantiers se découvrent l’un après l’autre, en pleine page.
+      </p>
+    </div>
+
+    <div class="story__viewport" data-story>
+      {projects.map((p) => (
+        <article class="story__item">
+          <div class="story__meta-left">
+            <div class="index-out story__index">{p.n}<small>/0{projects.length}</small></div>
+            <span class="tag story__num-tag">{p.tag}</span>
+            <h3>{p.title}</h3>
+          </div>
+
+          <div class="cframe story__img">
+            <img src={`/media/services/${img[p.slug]}.png`} alt={`SecureNet — ${p.title}, ${p.city}`} loading="lazy" decoding="async" />
+            <div class="story__label">{p.city}</div>
+            <div class="cframe__chips">
+              <span class="chip">{p.city}</span>
+              <span class="chip">{p.client}</span>
+            </div>
+          </div>
+
+          <div class="story__meta">
+            <span class="eyebrow eyebrow--ink">Le chantier</span>
+            <p><strong style="color:var(--navy)">{p.scope}.</strong> {p.text}</p>
+            <a class="link-arrow" href="/#contact">
+              Un projet similaire ?
+              <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

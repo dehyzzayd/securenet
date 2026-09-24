@@ -1,0 +1,54 @@
+---
+import Title from '../components/Title.astro';
+import { services } from '../lib/data';
+const img: Record<string, string> = {
+  'videosurveillance': 'videosurveillance',
+  'controle-acces': 'controle-acces',
+  'alarme-intrusion': 'alarme-intrusion',
+  'reseau-infrastructure': 'reseau-infrastructure',
+  'telesurveillance-maintenance': 'telesurveillance',
+  'etude-conseil': 'etude-conseil',
+};
+---
+<section class="deck-sec pad-y" id="expertises">
+  <span class="ghost" style="top:-.3em;right:-4%" aria-hidden="true">Métiers</span>
+  <div class="container deck-sec__grid">
+    <div class="deck-sec__sticky">
+      <span class="eyebrow eyebrow--ink">Ce que nous faisons</span>
+      <Title as="h2" lines={['Nos']} accent="expertises" tone="navy" size="l" />
+      <p class="lead">
+        Un seul interlocuteur pour toute la chaîne de sécurité : de l’étude à la pose,
+        du réseau à la supervision. Six savoir-faire complémentaires, réunis sous un
+        même toit.
+      </p>
+      <div class="deck-counter">
+        <span class="deck-counter__n" id="deck-count">01<small>/0{services.length}</small></span>
+        <span class="deck-counter__bar"><i id="deck-bar"></i></span>
+      </div>
+      <a class="link-arrow" href="/#contact">
+        Demander une étude
+        <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+    </div>
+
+    <div class="deck" id="deck" data-deck>
+      {services.map((s) => (
+        <article class="deck__card">
+          <div class="deck__text-col">
+            <div class="deck__bar"></div>
+            <div class="deck__cat">{s.n} · {s.category}</div>
+            <h3 class="deck__title">{s.title}</h3>
+            <p class="deck__text">{s.excerpt}</p>
+            <ul class="deck__points">
+              {s.points.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+          <div class="deck__media">
+            <img src={`/media/services/${img[s.slug]}.png`} alt={`SecureNet — ${s.title}`} loading="lazy" decoding="async" />
+            <a class="deck__more" href="/#contact">En savoir plus →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

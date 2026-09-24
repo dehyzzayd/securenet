@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 520" fill="none" stroke="#cfa574">
+  <g stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- wall bracket -->
+    <path d="M70 120 L70 400 M55 120 L85 120 M55 400 L85 400"/>
+    <path d="M70 250 L150 250"/>
+    <!-- knuckle -->
+    <circle cx="168" cy="250" r="20"/>
+    <!-- bullet camera body -->
+    <path d="M188 224 L470 214 Q500 214 500 240 L500 262 Q500 288 470 288 L188 278 Q176 278 176 264 L176 238 Q176 224 188 224 Z"/>
+    <!-- sunshield -->
+    <path d="M196 214 L474 205 Q492 205 492 220" stroke-dasharray="0" />
+    <path d="M196 214 L200 200 L470 191 L474 205"/>
+    <!-- lens rings -->
+    <ellipse cx="500" cy="251" rx="16" ry="34"/>
+    <ellipse cx="512" cy="251" rx="10" ry="26"/>
+    <circle cx="516" cy="251" r="12"/>
+    <!-- detail hatching -->
+    <path d="M230 250 L300 250 M330 250 L420 250" opacity="0.5" stroke-dasharray="4 8"/>
+    <!-- FOV rays -->
+    <path d="M528 251 L660 150 M528 251 L660 360" opacity="0.55" stroke-dasharray="3 10"/>
+    <path d="M660 150 Q690 251 660 360" opacity="0.4" stroke-dasharray="3 10"/>
+  </g>
+  <!-- loose construction marks -->
+  <g stroke-width="1" opacity="0.35">
+    <path d="M168 250 L168 320 M140 300 L196 300"/>
+    <circle cx="516" cy="251" r="3" fill="#cfa574"/>
+  </g>
+</svg>

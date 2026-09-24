@@ -1,0 +1,54 @@
+---
+import { stats } from '../lib/data';
+---
+<section class="hero" id="top">
+  <div class="hero__scene" aria-hidden="true">
+    <div class="hero__blueprint" data-hero-parallax></div>
+    <div class="hero__grad"></div>
+    <div class="hero__scan" id="hero-scan"></div>
+  </div>
+  <span class="ghost hero__ghost" aria-hidden="true">SecureNet</span>
+
+  <div class="hero__annot" aria-hidden="true">
+    <span>Zéro angle&nbsp;mort.</span>
+    <svg viewBox="0 0 60 60" fill="none"><path d="M52 6C40 10 20 18 10 40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 30l4 12 12-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div class="container hero__inner">
+    <span class="eyebrow hero__eyebrow">Sécurité &amp; vidéosurveillance · Grand Casablanca</span>
+    <h1 class="title hero__title title--white">
+      <span class="title__line">Nous veillons</span>
+      <span class="title__line">sur ce qui</span>
+      <span class="title__accent">compte pour vous</span><span class="title__dot">.</span>
+    </h1>
+
+    <div class="hero__grid">
+      <p class="hero__sub">
+        Caméras, contrôle d’accès, alarme et réseaux — conçus, posés et supervisés
+        par des installateurs qui connaissent le terrain.
+      </p>
+      <div class="hero__cta-wrap">
+        <span class="hero__promise">Étude &amp; devis gratuits · réponse sous 48 h</span>
+        <a class="btn btn--amber" href="/#contact">
+          Demander une étude
+          <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__stats">
+      {stats.map((s) => (
+        <div class="hero__stat">
+          <div class="num">
+            {s.plus && <span class="stat__plus">+</span>}
+            <span class="odo" data-value={s.value}>0</span>
+            {s.unit && <span class="stat__unit"> {s.unit}</span>}
+          </div>
+          <div class="stat__label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="hero__scrollhint" aria-hidden="true">Faites défiler pour découvrir</div>
+</section>

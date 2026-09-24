@@ -1,0 +1,46 @@
+/* SecureNet — design tokens (Heritage Prestige signature palette) */
+@import '/fonts/fonts.css';
+
+:root{
+  /* Color */
+  --navy:#222f96;         /* primary: buttons, headlines on paper, cards */
+  --navy-deep:#16226e;    /* hero/footer/bands background */
+  --amber:#cfa574;        /* accent: highlighted words, eyebrows, +, units, borders */
+  --amber-hi:#e1c794;     /* hover/lighter accent on dark */
+  --ink:#0e0e10;          /* neutral headline color */
+  --ink-2:#1b1b20;
+  --muted:#101a589e;      /* body copy on paper: navy at ~62% */
+  --paper:#fdfaf2;        /* main page ground */
+  --paper-2:#f0e8cd;      /* sketch/illustration tint */
+  --alt:#ebe2c6;          /* alternate warm band, tags */
+  --white:#fff;
+  --line-light:#0e0e1024; /* hairlines on paper */
+  --line-on-dark:#ffffff24;
+
+  /* Motion */
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+
+  /* Type scale (fluid) */
+  --hero:clamp(56px,8.2vw,132px);
+  --display-xl:clamp(48px,7vw,112px);
+  --display-l:clamp(34px,4.2vw,62px);
+  --display-m:clamp(32px,4vw,64px);
+  --display-s:clamp(22px,2.2vw,32px);
+  --body-l:clamp(17px,1.1vw,19px);
+  --body:16px;
+  --label:13px;
+
+  /* Layout */
+  --header-h:66px;
+  --rail:18px;                      /* frame-rail inset */
+  --gutter:clamp(20px,4vw,64px);
+  --maxw:1240px;
+
+  /* Chamfer geometry */
+  --cut2:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  --cut1:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+  --ic:clamp(16px,2.3vw,30px);
+  --imgcut2:polygon(0 0,calc(100% - var(--ic)) 0,100% var(--ic),100% 100%,var(--ic) 100%,0 calc(100% - var(--ic)));
+  --imgcut1:polygon(0 0,100% 0,100% calc(100% - var(--ic)),calc(100% - var(--ic)) 100%,0 100%);
+}

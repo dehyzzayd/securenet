@@ -1,0 +1,50 @@
+---
+import Title from '../components/Title.astro';
+const bullets = [
+  'Nos six expertises en détail',
+  'La méthode d’étude & de pose',
+  'Exemples de plans de couverture',
+  'Le matériel que nous installons',
+  'Nos engagements de maintenance',
+  'Comment nous chiffrons un devis',
+];
+---
+<section class="download pad-y on-dark" id="dossier">
+  <div class="download__bp" aria-hidden="true"></div>
+  <div class="container">
+    <div class="download__grid">
+      <div class="download__body">
+        <span class="eyebrow">Document de présentation</span>
+        <Title as="h2" lines={['Tout SecureNet,']} accent="en un document" tone="white" size="l" />
+        <p class="lead">
+          Recevez notre dossier de présentation : nos expertises, notre méthode et des
+          exemples concrets d’installations. Un aperçu clair, à partager avec vos
+          associés ou votre conseil syndical.
+        </p>
+        <ul class="download__list">
+          {bullets.map((b) => <li>{b}</li>)}
+        </ul>
+        <form class="download__gate" id="download-form" novalidate>
+          <input class="field" style="max-width:220px" type="text" name="name" placeholder="Votre nom" aria-label="Votre nom" autocomplete="name" />
+          <input class="field" style="max-width:260px" type="email" name="email" placeholder="Votre e-mail" aria-label="Votre e-mail" autocomplete="email" required />
+          <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button class="btn btn--amber" type="submit">
+            Télécharger le dossier
+            <svg viewBox="0 0 14 16" fill="none" aria-hidden="true"><path d="M7 1v10M2 7l5 5 5-5M1 15h12" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <span class="download__msg" id="download-msg" role="status" aria-live="polite"></span>
+        </form>
+      </div>
+
+      <div class="book" data-book aria-hidden="true">
+        <div class="book__body">
+          <div class="book__cover">
+            <span class="book__kicker">Dossier de présentation</span>
+            <span class="book__title">Sécuriser,<br /><b>pour durer.</b></span>
+            <span class="book__ed">SecureNet · Édition 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

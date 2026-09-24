@@ -1,0 +1,48 @@
+---
+import Title from '../components/Title.astro';
+---
+<section class="pos pad-y" id="approche">
+  <span class="par-glyph" style="left:-10px;top:-30px" aria-hidden="true">‖</span>
+  <div class="container pos__grid">
+    <div class="pos__body">
+      <span class="eyebrow eyebrow--ink">Notre approche</span>
+      <Title
+        as="h2"
+        lines={['Une sécurité', 'pensée']}
+        accent="sur mesure"
+        tone="navy"
+        size="l"
+        class="pos__title"
+      />
+      <p class="lead">
+        Chaque site a ses angles morts, ses accès sensibles, ses heures creuses.
+        Nous commençons toujours par regarder : un repérage sur place, un plan de
+        couverture au mètre près, un devis clair. Puis nous posons — caméras,
+        contrôle d’accès, alarme, réseau — avec du matériel de marque, un câblage
+        propre et une configuration documentée. Enfin, nous restons : maintenance,
+        mises à jour, astreinte. SecureNet est une entreprise indépendante, à taille
+        humaine, où l’installateur qui étudie votre projet est aussi celui qui vous
+        suit dans la durée.
+      </p>
+      <a class="btn" href="/#expertises">
+        Découvrir nos expertises
+        <svg viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M9 1l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+    </div>
+
+    <div class="pos__media">
+      <div class="cframe pos__frame" data-reveal>
+        <img src="/media/services/positioning.png" alt="Installateur SecureNet posant une caméra de vidéosurveillance" loading="lazy" decoding="async" />
+        <div class="pos__brand">Vu.<br />Posé.<br />Supervisé.</div>
+      </div>
+
+      <aside class="signature-card" data-reveal>
+        <span class="par-glyph" aria-hidden="true">‖</span>
+        <span class="eyebrow eyebrow--ink">Notre signature</span>
+        <p class="signature-card__quote">« La meilleure caméra est celle qui est posée au bon endroit. »</p>
+        <div class="signature-card__sign">SecureNet</div>
+        <div class="signature-card__name">Fondateur &amp; installateur</div>
+      </aside>
+    </div>
+  </div>
+</section>
