@@ -2,7 +2,10 @@ import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
 import * as schema from './schema';
 
-const url = process.env.DATABASE_URL || 'file:./data/securenet.db';
+// On Vercel (serverless) the working dir is read-only — only /tmp is writable.
+// For persistent leads in production, set DATABASE_URL to a hosted libSQL (Turso).
+const defaultUrl = process.env.VERCEL ? 'file:/tmp/securenet.db' : 'file:./data/securenet.db';
+const url = process.env.DATABASE_URL || defaultUrl;
 const client = createClient({ url });
 
 export const db = drizzle(client, { schema });
