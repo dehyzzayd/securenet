@@ -286,20 +286,12 @@ img[data-failed]{visibility:hidden}
 .download__list li::before{content:"";width:7px;height:7px;margin-top:5px;background:var(--amber);flex:none}
 .download__gate{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .download__msg{font:500 13px Satoshi;color:var(--amber-hi);width:100%;min-height:1em}
-.book{perspective:1600px;display:flex;justify-content:center}
-.book__body{position:relative;width:min(320px,72%);aspect-ratio:3/4;transform:rotateY(-20deg) rotateX(5deg);transform-style:preserve-3d;transition:transform .6s var(--ease-out);box-shadow:34px 44px 80px -22px rgba(0,0,0,.6)}
-.book__cover{position:absolute;inset:0;background:linear-gradient(150deg,#20306f,#16226e 60%,#0f1852);border:1px solid rgba(207,165,116,.5);padding:30px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
-.book__cover::before{content:"";position:absolute;inset:0;background:url(/media/blueprint/plan.svg) center/cover;opacity:.3;mix-blend-mode:screen}
-.book__body::after{content:"";position:absolute;top:2%;right:-14px;width:14px;height:96%;background:repeating-linear-gradient(90deg,#efe6cf 0 1px,#d9ccaa 1px 2px);transform:rotateY(60deg);transform-origin:left}
-.book__kicker{font:600 10px/1.4 Satoshi;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);position:relative;z-index:2}
-.book__title{font-family:Panchang;font-weight:800;text-transform:uppercase;font-size:clamp(20px,2.8vw,26px);line-height:1.02;color:#fff;position:relative;z-index:2}
-.book__title b{color:var(--amber);font-weight:800}
-.book__ed{font:600 10px/1 Satoshi;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);position:relative;z-index:2}
+.download__shot{margin:0;aspect-ratio:4/5;max-height:520px}
+.download__shot>img{filter:saturate(.98) contrast(1.03)}
 @media (max-width:900px){
   .download__grid{grid-template-columns:1fr}
   .download__list{grid-template-columns:1fr}
-  .book{margin-top:10px}
-  .book__body{transform:rotateY(-11deg) rotateX(3deg);width:min(300px,84%)}
+  .download__shot{aspect-ratio:16/11;max-height:none;margin-top:6px}
 }
 
 /* ============ CONTACT ============ */

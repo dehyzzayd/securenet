@@ -175,23 +175,6 @@ try {
   }
 } catch (e) { console.warn('reveal-mask', e); }
 
-/* ---------- 3D book tilt ---------- */
-try {
-  const book = document.querySelector<HTMLElement>('[data-book] .book__body');
-  const wrap = document.querySelector<HTMLElement>('[data-book]');
-  if (book && wrap && !reduce && !mqNarrow.matches) {
-    const rY = gsap.quickTo(book, 'rotationY', { duration: 0.6, ease: 'power3' });
-    const rX = gsap.quickTo(book, 'rotationX', { duration: 0.6, ease: 'power3' });
-    wrap.addEventListener('mousemove', (e) => {
-      const r = wrap.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      rY(-20 + px * 16); rX(5 - py * 12);
-    });
-    wrap.addEventListener('mouseleave', () => { rY(-20); rX(5); });
-  }
-} catch (e) { console.warn('book', e); }
-
 /* ---------- Map (lazy Leaflet) ---------- */
 try {
   const mapWrap = document.querySelector<HTMLElement>('[data-map]');
